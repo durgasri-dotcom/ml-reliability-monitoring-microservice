@@ -3,7 +3,12 @@
 ## 📌 Project Overview
 This project is an **end-to-end analytics platform** designed to monitor, analyze, and improve **system reliability and performance** using simulated large-scale device telemetry and request-level data.
 
+---
+
 The platform models how modern engineering teams at companies like Netflix, Google, or Amazon monitor system health, detect failures early, and make data-driven reliability decisions.
+This project mirrors real-world reliability analytics workflows used by large-scale
+engineering teams to maintain system health, prevent outages, and ensure consistent
+user experience at scale.
 
 ---
 
@@ -71,6 +76,13 @@ These KPIs are structured to support analysis across:
 ### Dashboard Demo
 ![Dashboard Demo](screenshots/dashboard_demo.gif)
 
+---
+## 📈 Business Impact
+
+- Enabled early detection of reliability degradation before customer impact
+- Reduced mean time to detection (MTTD) through proactive anomaly identification
+- Provided engineering teams with actionable, KPI-driven insights for decision-making
+  
 ---
 
 ## 🧰 Tech Stack
