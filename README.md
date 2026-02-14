@@ -1,122 +1,136 @@
 # ML Reliability Monitoring Microservice
 
-## 📌 Project Overview
+A production-ready FastAPI-based microservice for ML-driven reliability scoring and health monitoring. The system is containerized using Docker and integrated with a CI/CD pipeline for automated image publishing.
 
-This project is an **end-to-end analytics platform** designed to monitor, analyze, and improve **system reliability and performance** using simulated large-scale device telemetry and request-level data.
+## Overview
 
----
+This project implements a deployable microservice that evaluates system reliability metrics and exposes RESTful APIs for scoring and monitoring.
 
-The platform models how modern engineering teams at companies like Netflix, Google, or Amazon monitor system health, detect failures early, and make data-driven reliability decisions.
-This project mirrors real-world reliability analytics workflows used by large-scale
-engineering teams to maintain system health, prevent outages, and ensure consistent
-user experience at scale.
+- Modular architecture
+- Containerized deployment
+- CI/CD automation
+- Production-oriented structure
 
----
+## Architecture
 
-## 🎯 Key Objectives
+Client → FastAPI API Layer → ML Service Layer → Docker Container → Docker Hub (CI/CD Automated)
 
-- Monitor system reliability across thousands of devices
-- Detect early signs of performance degradation
-- Enable fast, actionable insights for engineering stakeholders
-- Demonstrate production-style analytics and ML workflows
+The architecture follows microservice design principles with separation of concerns and stateless execution.
 
----
+## Features
 
-## 📊 Reliability KPIs & Metrics
+### REST Endpoints
 
-The following **core reliability KPIs** are defined, documented, and analyzed:
+| Method | Endpoint | Description                  |
+| ------ | -------- | ---------------------------- |
+| GET    | /        | Service status               |
+| GET    | /health  | Health check endpoint        |
+| POST   | /predict | ML-based reliability scoring |
 
-- **Request Success Rate**
-- **Error Rate**
-- **Average & P95 Latency**
-- **Failure Frequency**
-- **Trend Indicators (time-based degradation patterns)**
+The /health endpoint provides structured service health status for integration with container orchestrators and monitoring systems.
 
-These KPIs are structured to support analysis across:
+Example response:
 
-- Device types
-- Regions
-- Time windows (daily trends)
+{
+"status": "healthy",
+"timestamp": "UTC timestamp",
+"service": "reliability-ml-api"
+}
 
----
+## Reliability Scoring
 
-## 🏗️ Data Modeling & Architecture
+The /predict endpoint accepts system performance metrics such as:
 
-- Designed **analytics-ready data models** to enable reusable analysis
-- Scaled to **5,000+ device records** with time-series telemetry
-- Structured datasets for compatibility with BI tools and ML pipelines
+- CPU usage
+- Memory usage
+- Latency
+- Error rate
+  The request is processed by a modular service layer that computes reliability scores.
 
-**Data Sources**
+## Project Structure
 
-- Simulated device telemetry
-- Request-level performance metrics
-- Time-based system logs
+.
+├── src/
+│ ├── api.py
+│ ├── model_service.py
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── LICENSE
+├── .github/
+│ └── workflows/
+│ └── ci.yml
 
----
+## Docker Usage
 
-## 🔍 Advanced Analytics & Signal Detection
+### Build Locally
 
-- Performed **request-pattern analysis** to uncover new signals correlated with reliability degradation
-- Identified abnormal latency and failure patterns across devices
-- Enabled proactive detection instead of reactive monitoring
+docker build -t ml-reliability-monitoring-microservice .
 
----
+## Run Container
 
-## 🤖 Anomaly Detection (ML)
+docker run -p 8000:8000 ml-reliability-monitoring-microservice
 
-- Implemented anomaly detection using:
-  - Rolling baselines
-  - Statistical thresholds
-  - Machine learning–ready features
-- Used PCA-based visualization for anomaly interpretation
-- Designed the system to be extendable to Isolation Forest and other ML models
+Access API documentation:
+http://localhost:8000/docs
 
----
+## Docker Hub
 
-## 📈 Visualization & Decision Support
+Pull the latest published image:
+docker pull durga1127/ml-reliability-monitoring-microservice:latest
 
-- Delivered **interactive dashboards** designed for fast decision-making
-- Visualized:
-  - Latency distributions
-  - Failure trends
-  - Anomaly clusters
-- Dashboards are optimized for **engineering and reliability teams**
+## Run directly:
 
-### Dashboard Demo
+docker run -p 8000:8000 durga1127/ml-reliability-monitoring-microservice:latest
 
-![Dashboard Demo](screenshots/dashboard_demo.gif)
+## CI/CD Pipeline
 
----
+The GitHub Actions workflow performs:
 
-## 📈 Business Impact
+- Dependency installation
+- FastAPI validation
+- Docker image build
+- Secure Docker Hub authentication
+- Automated image publishing
 
-- Enabled early detection of reliability degradation before customer impact
-- Reduced mean time to detection (MTTD) through proactive anomaly identification
-- Provided engineering teams with actionable, KPI-driven insights for decision-making
+Triggered on:
 
----
+- Push to main branch
+- Pull request to main branch
+  This ensures continuous validation and reproducible deployments.
 
-## 🧰 Tech Stack
+## Technology Stack
 
-- **Python** (pandas, numpy, scikit-learn)
-- **Streamlit** (analytics dashboard)
-- **Matplotlib / Seaborn** (visualizations)
-- **Machine Learning** (PCA, statistical anomaly detection)
-- **Git & GitHub** (version control)
+- Python 3.11
+- FastAPI
+- Uvicorn
+- Docker
+- Docker Compose
+- GitHub Actions
+- Docker Hub
 
----
+## Design Principles
 
-## 🚀 How to Run Locally
+- Separation of API and ML logic
+- Stateless service design
+- Containerized infrastructure
+- Automated build and deployment
+- Production-oriented architecture
 
-```bash
-pip install -r requirements.txt
-streamlit run src/dashboard.py
+## Future Enhancements
 
----
+- Prometheus metrics integration
+- Structured logging middleware
+- Kubernetes deployment manifests
+- Model persistence and versioning
+- Performance benchmarking
 
-## 👤 Author
-**Durga**
-Analytics & Machine Learning Engineer
-Specialized in Reliability, Performance & System Analytics
+## License
 
-```
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Author
+
+Durga Sri
+Machine Learning Engineer
+GitHub: https://github.com/durgasri-dotcom
