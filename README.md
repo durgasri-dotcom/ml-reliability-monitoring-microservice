@@ -1,4 +1,4 @@
-# Intelligent Quality, Reliability & Performance Analytics Platform
+# ML Reliability Monitoring Microservice
 
 ## 📌 Project Overview
 
